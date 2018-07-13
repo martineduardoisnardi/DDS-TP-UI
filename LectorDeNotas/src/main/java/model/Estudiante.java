@@ -4,6 +4,8 @@ package model;
 
 import org.uqbar.commons.utils.Observable;
 
+import excepciones.ExcepcionLegajo;
+
 @Observable
 public class Estudiante {
 	private int codigo;
@@ -13,7 +15,27 @@ public class Estudiante {
 	private String usuarioGithub;
 
 //	private List<Asignacion> asignaciones;
-
+	
+	public Estudiante(int codigo, String contrasenia) {
+		this.codigo = codigo;
+		this.contrasenia = contrasenia;
+	}
+	
+	public void autenticar() {
+		if (this.isSetCodigo()) {
+			throw new ExcepcionLegajo("Legajo Inexistente");
+		}
+		this.codigo = this.getCodigo();
+		/*		this.nombre = respuesta.getNombre();
+		this.apellido = respuesta.getApellido();
+		this.usuarioGithub = respuesta.getUsuarioGithub();
+		*/
+	}
+	
+	private boolean isSetCodigo() {
+		return codigo == 0;
+	}
+	
 	public void actualizarDatos(int codigo, String nombre, String apellido, String UsuarioGithub) {
 		this.codigo = codigo;
 		this.nombre = nombre;
