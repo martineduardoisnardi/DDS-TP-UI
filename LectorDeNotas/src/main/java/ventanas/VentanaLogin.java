@@ -37,7 +37,7 @@ public class VentanaLogin extends TransactionalDialog<LoginVM>{
 		new Label(seleccionEstudiante).setText("Legajo");
 		
 		NumericField codigo = new NumericField(seleccionEstudiante);
-		codigo.bindValueToProperty("codigo");
+		codigo.bindValueToProperty("legajo");
 		codigo.setWidth(150);
 		
 		new Label(seleccionEstudiante).setText("Contraseña");
@@ -68,7 +68,7 @@ public class VentanaLogin extends TransactionalDialog<LoginVM>{
 	@Override
 	protected void executeTask() {
 		try {
-			this.getModelObject().autenticar();
+			this.getModelObject().validarLegajo();
 		} catch (ExcepcionLegajo e){
 			throw new LectorDeNotasExcepciones(e.getMessage());
 		}

@@ -10,21 +10,21 @@ import model.Estudiante;
 @Observable
 public class LoginVM<Estudiante> {
 	
-	private int codigo;
+	private int legajo;
 	private String contrasenia;
 	private Estudiante estudianteSeleccionado; 
-	private boolean editar = false;
-	/*
+
+	
 	public LoginVM() {
-		this.estudiante = Repositorios.estudiantes.todos();
+		//.contrasenia.this.estudiante = Repositorios.estudiantes.todos();
 	}
-*/
-	public void autenticar() {
-//		this.estudianteSeleccionado.autenticar();
+
+	public void validarLegajo() {
+		//new RepositorioEstudiantes()
 	}
 	
-	public int getCodigo() {
-		return codigo;
+	public int getLegajo() {
+		return legajo;
 	}
 	
 	public String getContrasenia() {
@@ -32,7 +32,7 @@ public class LoginVM<Estudiante> {
 	}
 
 	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+		this.legajo = legajo;
 	}
 	
 	public Estudiante getEstudianteSeleccionado() {
