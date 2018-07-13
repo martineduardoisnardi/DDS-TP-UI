@@ -27,9 +27,6 @@ public class Asignacion extends Entity{
 		return notas.get(notas.size()-1).getValor();
 	}
 
-	/****************************************************
-	 * Getters
-	 ****************************************************/
 
 	public Integer getId() {
 		return id;

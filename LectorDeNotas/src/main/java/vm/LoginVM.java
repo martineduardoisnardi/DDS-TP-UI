@@ -1,10 +1,13 @@
 package vm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
 import model.Estudiante;
+import repositorios.RepositorioEstudiantes;
+import repositorios.Repositorios;
 
 @SuppressWarnings("hiding")
 @Observable
@@ -12,15 +15,19 @@ public class LoginVM<Estudiante> {
 	
 	private int legajo;
 	private String contrasenia;
+	private List<model.Estudiante> estudiantes;// = new ArrayList<Estudiante>();;
 	private Estudiante estudianteSeleccionado; 
-
 	
 	public LoginVM() {
-		//.contrasenia.this.estudiante = Repositorios.estudiantes.todos();
+		this.estudiantes = Repositorios.estudiantes.todos();
 	}
 
 	public void validarLegajo() {
 		//new RepositorioEstudiantes()
+		if (((RepositorioEstudiantes) estudiantes).estudianteValido(legajo)) {
+		//	throw new 
+		}
+		
 	}
 	
 	public int getLegajo() {
