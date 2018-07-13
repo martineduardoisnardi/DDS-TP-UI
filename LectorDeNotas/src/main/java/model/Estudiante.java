@@ -21,7 +21,8 @@ public class Estudiante {
 		this.contrasenia = contrasenia;
 	}
 	
-	public void autenticar() {
+
+	public void validarLegajo() {
 		if (this.isSetLegajo()) {
 			throw new ExcepcionLegajo("Legajo Inexistente");
 		}
@@ -36,8 +37,8 @@ public class Estudiante {
 		return legajo == 0;
 	}
 	
-	public void actualizarDatos(int codigo, String nombre, String apellido, String UsuarioGithub) {
-		this.legajo = codigo;
+	public void actualizarDatos(int legajo, String nombre, String apellido, String UsuarioGithub) {
+		this.legajo = legajo;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.usuarioGithub = UsuarioGithub;
