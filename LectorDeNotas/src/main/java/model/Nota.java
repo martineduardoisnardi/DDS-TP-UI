@@ -6,16 +6,12 @@ import java.util.stream.*;
 public class Nota {
 	private int id;
 	private String valor;
-	private String creado;
-	private String actualizado;
 	private static final List<String> NOTAS_CONCEPTUALES_PARA_APROBAR = Stream.of("B+","B","B-","R+","R")
 																				 .collect(Collectors.toList());
 
-	public Nota(int _id, String _valor, String _creado, String _actualizado) {
+	public Nota(int _id, String _valor) {
 		this.id =  _id;
 		this.valor = _valor;
-		this.creado = _creado;
-		this.actualizado = _actualizado;
 	}
 	
 	public int getId() {

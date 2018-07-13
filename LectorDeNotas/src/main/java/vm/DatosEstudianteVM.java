@@ -11,7 +11,7 @@ import model.Estudiante;
 @Observable
 public class DatosEstudianteVM {
 	private Estudiante estudiante;
-	private int codigo;
+	private int legajo;
 	private String nombre;
 	private String apellido;
 	private String gitHub;
@@ -24,7 +24,7 @@ public class DatosEstudianteVM {
 	}
 
 	public void actualizarDatosEstudiante() {
-		estudiante.actualizarDatos(codigo, nombre, apellido, gitHub);
+		estudiante.actualizarDatos(legajo, nombre, apellido, gitHub);
 		editar = false;
 	}
 /*
@@ -38,11 +38,11 @@ public class DatosEstudianteVM {
 	}
 
 	public int getCodigo() {
-		return estudiante.getCodigo();
+		return estudiante.getLegajo();
 	}
 
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setCodigo(int _codigo) {
+		this.legajo = _codigo;
 		ObservableUtils.firePropertyChanged(this, "controlCodigo");
 		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
@@ -83,7 +83,7 @@ public class DatosEstudianteVM {
 
 	public void setEditar(boolean editar) {
 		this.editar = editar;
-		this.codigo = estudiante.getCodigo();
+		this.legajo = estudiante.getLegajo();
 		this.nombre = estudiante.getNombre();
 		this.apellido = estudiante.getApellido();
 		this.gitHub = estudiante.getUsuarioGithub();
@@ -107,7 +107,7 @@ public class DatosEstudianteVM {
 	}
 */	
 	public boolean isControlCodigo() {
-		return codigo == NUMERO_DIGITOS_CODIGO;
+		return legajo == NUMERO_DIGITOS_CODIGO;
 	}
 
 	public boolean isControlNombre() {
