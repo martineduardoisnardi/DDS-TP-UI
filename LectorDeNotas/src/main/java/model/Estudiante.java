@@ -8,7 +8,7 @@ import excepciones.ExcepcionLegajo;
 
 @Observable
 public class Estudiante {
-	private int codigo;
+	private int legajo;
 	private String contrasenia;
 	private String nombre;
 	private String apellido;
@@ -16,28 +16,28 @@ public class Estudiante {
 
 //	private List<Asignacion> asignaciones;
 	
-	public Estudiante(int codigo, String contrasenia) {
-		this.codigo = codigo;
+	public Estudiante(int legajo, String contrasenia) {
+		this.legajo = legajo;
 		this.contrasenia = contrasenia;
 	}
 	
-	public void autenticar() {
-		if (this.isSetCodigo()) {
+	public void validarLegajo() {
+		if (this.isSetLegajo()) {
 			throw new ExcepcionLegajo("Legajo Inexistente");
 		}
-		this.codigo = this.getCodigo();
+		this.legajo = this.getLegajo();
 		/*		this.nombre = respuesta.getNombre();
 		this.apellido = respuesta.getApellido();
 		this.usuarioGithub = respuesta.getUsuarioGithub();
 		*/
 	}
 	
-	private boolean isSetCodigo() {
-		return codigo == 0;
+	private boolean isSetLegajo() {
+		return legajo == 0;
 	}
 	
-	public void actualizarDatos(int codigo, String nombre, String apellido, String UsuarioGithub) {
-		this.codigo = codigo;
+	public void actualizarDatos(int legajo, String nombre, String apellido, String UsuarioGithub) {
+		this.legajo = legajo;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.usuarioGithub = UsuarioGithub;
@@ -47,8 +47,8 @@ public class Estudiante {
 	 * Getters
 	 ****************************************************/
 
-	public int getCodigo() {
-		return codigo;
+	public int getLegajo() {
+		return legajo;
 	}
 
 	public String getContrasenia() {
