@@ -77,26 +77,6 @@ public class DatosEstudianteVM {
 		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
 
-	public boolean isEditar() {
-		return editar;
-	}
-
-	public void setEditar(boolean editar) {
-		this.editar = editar;
-		this.legajo = estudiante.getLegajo();
-		this.nombre = estudiante.getNombre();
-		this.apellido = estudiante.getApellido();
-		this.gitHub = estudiante.getUsuarioGithub();
-		ObservableUtils.firePropertyChanged(this, "codigo");
-		ObservableUtils.firePropertyChanged(this, "nombre");
-		ObservableUtils.firePropertyChanged(this, "apellido");
-		ObservableUtils.firePropertyChanged(this, "gitHub");
-		ObservableUtils.firePropertyChanged(this, "controlEditar");
-		ObservableUtils.firePropertyChanged(this, "controlCodigo");
-		ObservableUtils.firePropertyChanged(this, "controlNombre");
-		ObservableUtils.firePropertyChanged(this, "controlApellido");
-		ObservableUtils.firePropertyChanged(this, "controlGitHub");
-	}
 /*
 	public Asignacion getAsignacionSeleccionada() {
 		return asignacionSeleccionada;
@@ -122,10 +102,6 @@ public class DatosEstudianteVM {
 		return gitHub.matches("[A-Za-z1-9-]++");
 	}
 
-	public boolean isControlEditar() {
-		return this.isEditar() && this.isControlCodigo() && this.isControlNombre() && this.isControlApellido()
-				&& this.isControlGitHub();
-	}
 
 	public String getSaludo() {
 		return "Bienvenido !!!";

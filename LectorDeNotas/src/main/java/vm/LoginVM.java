@@ -16,8 +16,7 @@ public class LoginVM<Estudiante> {
 	private int legajo;
 	private String contrasenia;
 	private List<model.Estudiante> estudiantes;// = new ArrayList<Estudiante>();;
-	private Estudiante estudianteSeleccionado; 
-	
+
 	public LoginVM() {
 		this.estudiantes = Repositorios.estudiantes.todos();
 	}
@@ -38,12 +37,8 @@ public class LoginVM<Estudiante> {
 		return contrasenia;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setLegajo(int legajo) {
 		this.legajo = legajo;
-	}
-	
-	public Estudiante getEstudianteSeleccionado() {
-		return estudianteSeleccionado;
 	}
 	
 	public void setContrasenia(String contrasenia) {
