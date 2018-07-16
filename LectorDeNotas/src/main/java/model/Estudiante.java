@@ -1,10 +1,15 @@
 package model;
 
+import java.util.List;
+
 //import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
 import excepciones.ExcepcionLegajo;
+import repositorios.RepositorioAsignaciones;
+import repositorios.RepositorioEstudiantes;
+import repositorios.Repositorios;
 
 @Observable
 public class Estudiante {
@@ -13,8 +18,8 @@ public class Estudiante {
 	private String nombre;
 	private String apellido;
 	private String usuarioGithub;
-
-//	private List<Asignacion> asignaciones;
+	private List<Asignacion> asignaciones;
+	private List<model.Asignacion> asignaciones2;
 	
 	public Estudiante(int legajo, String contrasenia) {
 		this.legajo = legajo;
@@ -43,7 +48,11 @@ public class Estudiante {
 		this.apellido = apellido;
 		this.usuarioGithub = UsuarioGithub;
 	}
-
+	
+	public List<Asignacion> asignacionesDelEstudiante() {
+		return this.asignaciones = ((RepositorioAsignaciones) asignaciones).todos();
+	}
+	
 	/****************************************************
 	 * Getters
 	 ****************************************************/

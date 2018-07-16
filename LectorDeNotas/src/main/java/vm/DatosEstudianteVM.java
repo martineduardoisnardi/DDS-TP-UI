@@ -1,10 +1,13 @@
 package vm;
 
+import java.util.List;
+
 //import java.util.List;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
+import model.Asignacion;
 //import model.Asignacion;
 import model.Estudiante;
 
@@ -15,7 +18,6 @@ public class DatosEstudianteVM {
 	private String nombre;
 	private String apellido;
 	private String gitHub;
-	private boolean editar = false;
 	private static final int NUMERO_DIGITOS_CODIGO = 8;
 //	private Asignacion asignacionSeleccionada;
 
@@ -25,26 +27,19 @@ public class DatosEstudianteVM {
 
 	public void actualizarDatosEstudiante() {
 		estudiante.actualizarDatos(legajo, nombre, apellido, gitHub);
-		editar = false;
 	}
-/*
-	public void checkAsignacionesEstudiante() {
-		estudiante.checkAsignaciones();
-		ObservableUtils.firePropertyChanged(this, "asignaciones");
-	}
-*/
+	
 	public void readAsignaciones() {
 
 	}
 
-	public int getCodigo() {
+	public int getLegajo() {
 		return estudiante.getLegajo();
 	}
 
-	public void setCodigo(int _codigo) {
-		this.legajo = _codigo;
+	public void setLegajo(int _legajo) {
+		this.legajo = _legajo;
 		ObservableUtils.firePropertyChanged(this, "controlCodigo");
-		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
 
 	public String getNombre() {
@@ -54,7 +49,6 @@ public class DatosEstudianteVM {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 		ObservableUtils.firePropertyChanged(this, "controlNombre");
-		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
 
 	public String getApellido() {
@@ -64,7 +58,6 @@ public class DatosEstudianteVM {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 		ObservableUtils.firePropertyChanged(this, "controlApellido");
-		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
 
 	public String getGitHub() {
@@ -74,9 +67,12 @@ public class DatosEstudianteVM {
 	public void setGitHub(String gitHub) {
 		this.gitHub = gitHub;
 		ObservableUtils.firePropertyChanged(this, "controlGitHub");
-		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
-
+	
+	public List<Asignacion> asignacionesDelEstudiante() {
+		return estudiante.asignacionesDelEstudiante();
+	}
+	
 /*
 	public Asignacion getAsignacionSeleccionada() {
 		return asignacionSeleccionada;
