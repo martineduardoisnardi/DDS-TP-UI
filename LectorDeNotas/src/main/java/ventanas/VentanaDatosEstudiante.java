@@ -42,7 +42,7 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 
 		new Label(panelDatosEstudiante).setText("Legajo:");
 
-		TextBox legajo = new TextBox(panelDatosEstudiante);
+		NumericField legajo = new NumericField(panelDatosEstudiante);
 		legajo.bindValueToProperty("legajo");
 		legajo.setWidth(150);
 		
