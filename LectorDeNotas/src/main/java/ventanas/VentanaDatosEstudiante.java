@@ -105,9 +105,9 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 		
 		Table<Asignacion> tabla = new Table<Asignacion>(panelPrincipal, Asignacion.class);
 
-		tabla.bindItemsToProperty("asignaciones");
-		tabla.bindValueToProperty("asignacionSeleccionada");
-		tabla.setNumberVisibleRows(10);
+//		tabla.bindItemsToProperty("asignaciones");
+//		tabla.bindValueToProperty("asignacionSeleccionada");
+//		tabla.setNumberVisibleRows(10);
 
 		Column<Asignacion> columnaTitulo = new Column<Asignacion>(tabla);
 		columnaTitulo.setTitle("Asignacion");
@@ -135,10 +135,10 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 	
 	@Override
 	protected void addActions(Panel panelAcciones) {
-/*		Button checkAsignacion = new Button(panelAcciones);
+		Button checkAsignacion = new Button(panelAcciones);
 		checkAsignacion.setCaption("Chequear Mis Notas");
-		checkAsignacion.onClick(()-> this.getModelObject().checkAsignacionesEstudiante());
-*/
+		checkAsignacion.onClick(()-> this.getModelObject().asignacionesDelEstudiante());
+
 	}	
 	
 }

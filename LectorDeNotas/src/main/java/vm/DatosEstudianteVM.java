@@ -98,7 +98,11 @@ public class DatosEstudianteVM {
 		return gitHub.matches("[A-Za-z1-9-]++");
 	}
 
-
+	public boolean isControlEditar() {
+		return this.isControlLegajo() && this.isControlNombre() && this.isControlApellido()
+				&& this.isControlGitHub();
+	}
+	
 	public String getSaludo() {
 		return "Bienvenido !!!";
 	}
