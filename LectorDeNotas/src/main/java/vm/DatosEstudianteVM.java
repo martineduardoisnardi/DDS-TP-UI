@@ -18,7 +18,7 @@ public class DatosEstudianteVM {
 	private String nombre;
 	private String apellido;
 	private String gitHub;
-	private static final int NUMERO_DIGITOS_CODIGO = 8;
+	private static final int NUMERO_DIGITOS_CODIGO = 7;
 //	private Asignacion asignacionSeleccionada;
 
 	public DatosEstudianteVM(Estudiante estudiante) {
@@ -68,7 +68,7 @@ public class DatosEstudianteVM {
 		this.gitHub = gitHub;
 		ObservableUtils.firePropertyChanged(this, "controlGitHub");
 	}
-	
+		
 	public List<Asignacion> asignacionesDelEstudiante() {
 		return estudiante.asignacionesDelEstudiante();
 	}
@@ -83,7 +83,7 @@ public class DatosEstudianteVM {
 	}
 */	
 	public boolean isControlLegajo() {
-		return legajo == NUMERO_DIGITOS_CODIGO;
+		return Integer.toString(legajo).length() == NUMERO_DIGITOS_CODIGO;
 	}
 
 	public boolean isControlNombre() {

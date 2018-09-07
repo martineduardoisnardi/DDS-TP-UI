@@ -2,7 +2,7 @@ package ventanas;
 
 import org.uqbar.arena.bindings.ValueTransformer;
 
-public final class TransformadorControlCodigo implements ValueTransformer<Boolean, String> {
+public final class TransformadorControlLegajo implements ValueTransformer<Boolean, String> {
 
 	@Override
 	public Class<Boolean> getModelType() {
@@ -16,7 +16,7 @@ public final class TransformadorControlCodigo implements ValueTransformer<Boolea
 
 	@Override
 	public String modelToView(Boolean arg0) {
-		return arg0 ? "OK" : "Debe contener 8 digitos";
+		return arg0 ? "OK" : "Debe contener 7 digitos";
 	}
 
 	@Override

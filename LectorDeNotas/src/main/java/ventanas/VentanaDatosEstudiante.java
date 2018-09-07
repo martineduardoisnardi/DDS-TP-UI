@@ -7,7 +7,6 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.NumericField;
 import org.uqbar.arena.widgets.Button;
-import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.SimpleWindow;
@@ -43,12 +42,12 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 
 		new Label(panelDatosEstudiante).setText("Legajo:");
 
-		NumericField legajo = new NumericField(panelDatosEstudiante);
+		TextBox legajo = new TextBox(panelDatosEstudiante);
 		legajo.bindValueToProperty("legajo");
 		legajo.setWidth(150);
-
+		
 		Label controlLegajo = new Label(panelDatosEstudiante);
-		controlLegajo.bindValueToProperty("controlLegajo").setTransformer(new TransformadorControlCodigo());
+		controlLegajo.bindValueToProperty("controlLegajo").setTransformer(new TransformadorControlLegajo());
 		controlLegajo.bindForegroundToProperty("controlLegajo").setTransformer(new TransformadorColorEnLosValores());
 		controlLegajo.setFontSize(8);
 
