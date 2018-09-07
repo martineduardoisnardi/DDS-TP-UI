@@ -39,7 +39,7 @@ public class DatosEstudianteVM {
 
 	public void setLegajo(int _legajo) {
 		this.legajo = _legajo;
-		ObservableUtils.firePropertyChanged(this, "controlCodigo");
+		ObservableUtils.firePropertyChanged(this, "controlLegajo");
 	}
 
 	public String getNombre() {
@@ -82,7 +82,7 @@ public class DatosEstudianteVM {
 		return estudiante.getAsignaciones();
 	}
 */	
-	public boolean isControlCodigo() {
+	public boolean isControlLegajo() {
 		return legajo == NUMERO_DIGITOS_CODIGO;
 	}
 

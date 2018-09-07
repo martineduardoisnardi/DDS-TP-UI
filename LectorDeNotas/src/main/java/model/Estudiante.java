@@ -2,8 +2,6 @@ package model;
 
 import java.util.List;
 
-//import java.util.List;
-
 import org.uqbar.commons.utils.Observable;
 
 import excepciones.ExcepcionLegajo;
@@ -27,20 +25,7 @@ public class Estudiante {
 	}
 	
 
-	public void validarLegajo() {
-		if (this.isSetLegajo()) {
-			throw new ExcepcionLegajo("Legajo Inexistente");
-		}
-		this.legajo = this.getLegajo();
-		/*		this.nombre = respuesta.getNombre();
-		this.apellido = respuesta.getApellido();
-		this.usuarioGithub = respuesta.getUsuarioGithub();
-		*/
-	}
-	
-	private boolean isSetLegajo() {
-		return legajo == 0;
-	}
+
 	
 	public void actualizarDatos(int legajo, String nombre, String apellido, String UsuarioGithub) {
 		this.legajo = legajo;

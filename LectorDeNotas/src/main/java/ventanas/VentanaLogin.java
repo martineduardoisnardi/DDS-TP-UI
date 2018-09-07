@@ -1,5 +1,6 @@
 package ventanas;
 
+import excepciones.LoginException;
 import org.uqbar.arena.aop.windows.TransactionalDialog;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -18,9 +19,7 @@ import filtros.LectorDeNotasFiltrosDeTexto;
 import vm.LoginVM;
 import model.Estudiante;
 
-
-//@SuppressWarnings({ "serial", "rawtypes" })
-@SuppressWarnings({"rawtypes" })
+@SuppressWarnings({"serial" })
 public class VentanaLogin extends TransactionalDialog<LoginVM>{
 	
 	public VentanaLogin (WindowOwner owner){
@@ -68,12 +67,13 @@ public class VentanaLogin extends TransactionalDialog<LoginVM>{
 	@Override
 	protected void executeTask() {
 		try {
-			this.getModelObject().validarLegajo();
-		} catch (ExcepcionLegajo e){
-			throw new LectorDeNotasExcepciones(e.getMessage());
+			this.getModelObject().validarEstudiante();
+		} catch (LoginException e){
+			throw new LoginException(e.getMessage());
 		}
-//		SimpleWindow<?> panelDatosEstudiante = new VentanaDatosEstudiante(this, Estudiante estudiante);
-//		panelDatosEstudiante.open();
-//		this.cancelTask();
+		SimpleWindow<?> panelDatosEstudiante = 
+				new VentanaDatosEstudiante(this, this.getModelObject().getEstudianteSeleccionado());
+		panelDatosEstudiante.open();
+		this.cancelTask();
 	}
 }

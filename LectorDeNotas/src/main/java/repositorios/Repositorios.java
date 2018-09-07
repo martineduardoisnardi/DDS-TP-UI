@@ -1,6 +1,6 @@
 package repositorios;
 
 public class Repositorios {
-	public static RepositorioEstudiantes estudiantes = new RepositorioEstudiantes();
-	public static RepositorioAsignaciones asignacion = new RepositorioAsignaciones();
+	public static RepositorioEstudiantes estudiantes = RepositorioEstudiantes.getInstance();
+	public static RepositorioAsignaciones asignacion = RepositorioAsignaciones.getInstance();
 }
