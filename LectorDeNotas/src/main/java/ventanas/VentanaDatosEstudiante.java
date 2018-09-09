@@ -127,16 +127,16 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 		columnaEstado.setTitle("Estado");
 		columnaEstado.setFixedSize(150);
 	}
-	
+/*	
 	protected void executeTask() {
-		this.getModelObject().asignacionesDelEstudiante();
+		this.getModelObject().getAsignacionesDelEstudiante();
 	}
-	
+*/	
 	@Override
 	protected void addActions(Panel panelAcciones) {
 		Button checkAsignacion = new Button(panelAcciones);
 		checkAsignacion.setCaption("Chequear Mis Notas");
-		checkAsignacion.onClick(()-> this.getModelObject().asignacionesDelEstudiante());
+		checkAsignacion.onClick(()-> this.getModelObject().getAsignacionesDelEstudiante());
 
 	}	
 	

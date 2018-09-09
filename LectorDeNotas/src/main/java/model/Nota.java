@@ -30,11 +30,11 @@ public class Nota {
 		return esNotaConceptualAprobada(valor) || esNotaNumericaAprobada(valor);
 	}
 	
-	private boolean esNotaConceptualAprobada(String valor) {
+	private boolean esNotaNumericaAprobada(String valor) {
 		return Integer.parseInt(valor) >= 6;
 	}
 	
-	private boolean esNotaNumericaAprobada(String valor) {
+	private boolean esNotaConceptualAprobada(String valor) {
 		return NOTAS_CONCEPTUALES_PARA_APROBAR.stream().anyMatch(nota -> nota.equals(valor));
 	}
 }

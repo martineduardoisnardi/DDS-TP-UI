@@ -17,7 +17,6 @@ import excepciones.ExcepcionLegajo;
 import excepciones.LectorDeNotasExcepciones;
 import filtros.LectorDeNotasFiltrosDeTexto;
 import vm.LoginVM;
-import model.Estudiante;
 
 @SuppressWarnings({"serial" })
 public class VentanaLogin extends TransactionalDialog<LoginVM>{

@@ -16,6 +16,10 @@ public class RepositorioAsignaciones {
 		return instance;
 	}
 	
+	public void agregarAsignacion(Asignacion unaAsigancion) {
+		asignaciones.add(unaAsigancion);
+	}
+	
 	public List<Asignacion> todos(){
 		return asignaciones;
 	}

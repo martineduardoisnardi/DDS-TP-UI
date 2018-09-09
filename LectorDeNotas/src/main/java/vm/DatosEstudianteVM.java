@@ -2,13 +2,10 @@ package vm;
 
 import java.util.List;
 
-//import java.util.List;
-
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import model.Asignacion;
-//import model.Asignacion;
 import model.Estudiante;
 
 @Observable
@@ -69,7 +66,7 @@ public class DatosEstudianteVM {
 		ObservableUtils.firePropertyChanged(this, "controlGitHub");
 	}
 		
-	public List<Asignacion> asignacionesDelEstudiante() {
+	public List<Asignacion> getAsignacionesDelEstudiante() {
 		return estudiante.asignacionesDelEstudiante();
 	}
 	

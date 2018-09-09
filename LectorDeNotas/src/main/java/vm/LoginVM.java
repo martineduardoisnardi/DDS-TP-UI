@@ -3,6 +3,8 @@ package vm;
 import excepciones.LoginException;
 import java.util.List;
 import org.uqbar.commons.utils.Observable;
+
+import model.Asignacion;
 import model.Estudiante;
 import repositorios.Repositorios;
 
@@ -13,6 +15,7 @@ public class LoginVM {
 	private String contrasenia;
 	private List<Estudiante> estudiantes;
 	private Estudiante estudianteSeleccionado;
+	private List<Asignacion> asignacionesEstudiante;
 
 	public LoginVM() {
 		this.estudiantes = Repositorios.estudiantes.todos();
@@ -38,6 +41,10 @@ public class LoginVM {
 	
 	public Estudiante getEstudianteSeleccionado() {
 		return estudianteSeleccionado;
+	}
+	
+	public List<Asignacion> getAsignacionesEstudiante() {
+		return asignacionesEstudiante;
 	}
 	
 	public int getLegajo() {

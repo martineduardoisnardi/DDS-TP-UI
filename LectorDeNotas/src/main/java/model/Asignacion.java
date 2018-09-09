@@ -12,6 +12,13 @@ public class Asignacion extends Entity{
 	private String descripcion;
 	private List<Nota> notas;
 	
+	public Asignacion(int id, String titulo, String descripcion, List<Nota> notas) {
+		this.id = id;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.notas = notas;
+	}
+	
 	public boolean estaAprobado() {
 		if (notas.isEmpty()) {
 			return true;

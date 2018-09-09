@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 import repositorios.RepositorioAsignaciones;
+import repositorios.Repositorios;
 
 @Observable
 public class Estudiante {
@@ -30,7 +31,8 @@ public class Estudiante {
 	}
 	
 	public List<Asignacion> asignacionesDelEstudiante() {
-		return this.asignaciones = ((RepositorioAsignaciones) asignaciones).todos();
+//		return this.asignaciones = ((RepositorioAsignaciones) asignaciones).todos();
+		return this.asignaciones = Repositorios.asignaciones.todos();
 	}
 	
 	/****************************************************
