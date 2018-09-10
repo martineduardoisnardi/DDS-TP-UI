@@ -15,8 +15,9 @@ public class DatosEstudianteVM {
 	private String nombre;
 	private String apellido;
 	private String gitHub;
-	private static final int NUMERO_DIGITOS_CODIGO = 7;
-//	private Asignacion asignacionSeleccionada;
+	private boolean editar = false;
+	private static final int NUMERO_DIGITOS_LEGAJO = 7;
+	private Asignacion asignacionSeleccionada;
 
 	public DatosEstudianteVM(Estudiante estudiante) {
 		this.estudiante = estudiante;
@@ -24,6 +25,7 @@ public class DatosEstudianteVM {
 
 	public void actualizarDatosEstudiante() {
 		estudiante.actualizarDatos(legajo, nombre, apellido, gitHub);
+		editar = false;
 	}
 	
 	public void readAsignaciones() {
@@ -37,6 +39,7 @@ public class DatosEstudianteVM {
 	public void setLegajo(int _legajo) {
 		this.legajo = _legajo;
 		ObservableUtils.firePropertyChanged(this, "controlLegajo");
+		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
 
 	public String getNombre() {
@@ -46,6 +49,7 @@ public class DatosEstudianteVM {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 		ObservableUtils.firePropertyChanged(this, "controlNombre");
+		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
 
 	public String getApellido() {
@@ -55,6 +59,7 @@ public class DatosEstudianteVM {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 		ObservableUtils.firePropertyChanged(this, "controlApellido");
+		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
 
 	public String getGitHub() {
@@ -64,13 +69,35 @@ public class DatosEstudianteVM {
 	public void setGitHub(String gitHub) {
 		this.gitHub = gitHub;
 		ObservableUtils.firePropertyChanged(this, "controlGitHub");
+		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
-		
+	
+	public boolean isEditar() {
+		return editar;
+	}
+
+	public void setEditar(boolean editar) {
+		this.editar = editar;
+		this.legajo = estudiante.getLegajo();
+		this.nombre = estudiante.getNombre();
+		this.apellido = estudiante.getApellido();
+		this.gitHub = estudiante.getUsuarioGithub();
+		ObservableUtils.firePropertyChanged(this, "legajo");
+		ObservableUtils.firePropertyChanged(this, "nombre");
+		ObservableUtils.firePropertyChanged(this, "apellido");
+		ObservableUtils.firePropertyChanged(this, "gitHub");
+		ObservableUtils.firePropertyChanged(this, "controlEditar");
+		ObservableUtils.firePropertyChanged(this, "controlLegajo");
+		ObservableUtils.firePropertyChanged(this, "controlNombre");
+		ObservableUtils.firePropertyChanged(this, "controlApellido");
+		ObservableUtils.firePropertyChanged(this, "controlGitHub");
+	}
+	
 	public List<Asignacion> getAsignacionesDelEstudiante() {
 		return estudiante.asignacionesDelEstudiante();
 	}
 	
-/*
+
 	public Asignacion getAsignacionSeleccionada() {
 		return asignacionSeleccionada;
 	}
@@ -78,9 +105,9 @@ public class DatosEstudianteVM {
 	public List<Asignacion> getAsignaciones() {
 		return estudiante.getAsignaciones();
 	}
-*/	
+	
 	public boolean isControlLegajo() {
-		return Integer.toString(legajo).length() == NUMERO_DIGITOS_CODIGO;
+		return Integer.toString(legajo).length() == NUMERO_DIGITOS_LEGAJO;
 	}
 
 	public boolean isControlNombre() {

@@ -19,7 +19,7 @@ public class Asignacion extends Entity{
 		this.notas = notas;
 	}
 	
-	public boolean estaAprobado() {
+	public boolean isAprobado() {
 		if (notas.isEmpty()) {
 			return true;
 		}

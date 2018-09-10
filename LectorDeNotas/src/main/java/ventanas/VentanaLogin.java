@@ -8,6 +8,7 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.NumericField;
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.PasswordField;
 import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.SimpleWindow;
@@ -40,7 +41,7 @@ public class VentanaLogin extends TransactionalDialog<LoginVM>{
 		
 		new Label(seleccionEstudiante).setText("Contraseña");
 
-		TextBox contrasenia = new TextBox(seleccionEstudiante);
+		PasswordField contrasenia = new PasswordField(seleccionEstudiante);
 		contrasenia.withFilter(LectorDeNotasFiltrosDeTexto.FILTRO_ALFANUMERICO);
 		contrasenia.bindValueToProperty("contrasenia");
 		contrasenia.setWidth(150);

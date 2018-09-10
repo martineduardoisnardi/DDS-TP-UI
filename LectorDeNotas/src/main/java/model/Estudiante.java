@@ -32,7 +32,7 @@ public class Estudiante {
 	
 	public List<Asignacion> asignacionesDelEstudiante() {
 //		return this.asignaciones = ((RepositorioAsignaciones) asignaciones).todos();
-		return this.asignaciones = Repositorios.asignaciones.todos();
+		return this.asignaciones = RepositorioAsignaciones.getInstance().todos();
 	}
 	
 	/****************************************************
@@ -58,8 +58,8 @@ public class Estudiante {
 	public String getUsuarioGithub() {
 		return usuarioGithub;
 	}
-/*
+
 	public List<Asignacion> getAsignaciones() {
 		return asignaciones;
-	}*/
+	}
 }

@@ -9,10 +9,6 @@ public class RepositorioEstudiantes {
 	private static RepositorioEstudiantes instance;
 	public List<Estudiante> estudiantes = new ArrayList<Estudiante>();
 	
-	private RepositorioEstudiantes() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public static RepositorioEstudiantes getInstance() {
 		if (instance == null) {
 			instance = new RepositorioEstudiantes();

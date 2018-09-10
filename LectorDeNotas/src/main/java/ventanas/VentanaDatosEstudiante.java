@@ -7,6 +7,7 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.NumericField;
 import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.SimpleWindow;
@@ -44,30 +45,35 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 
 		NumericField legajo = new NumericField(panelDatosEstudiante);
 		legajo.bindValueToProperty("legajo");
+		legajo.bindEnabledToProperty("editar");
 		legajo.setWidth(150);
 		
 		Label controlLegajo = new Label(panelDatosEstudiante);
 		controlLegajo.bindValueToProperty("controlLegajo").setTransformer(new TransformadorControlLegajo());
 		controlLegajo.bindForegroundToProperty("controlLegajo").setTransformer(new TransformadorColorEnLosValores());
 		controlLegajo.setFontSize(8);
+		controlLegajo.bindVisibleToProperty("editar");
 
 		new Label(panelDatosEstudiante).setText("Nombre:");
 
 		TextBox nombre = new TextBox(panelDatosEstudiante);
 		nombre.withFilter(LectorDeNotasFiltrosDeTexto.FILTRO_ALFABETICO);
 		nombre.bindValueToProperty("nombre");
+		nombre.bindEnabledToProperty("editar");
 		nombre.setWidth(150);
 
 		Label controlNombre = new Label(panelDatosEstudiante);
 		controlNombre.bindValueToProperty("controlNombre").setTransformer(new TransformadorControlNombre());
 		controlNombre.bindForegroundToProperty("controlNombre").setTransformer(new TransformadorColorEnLosValores());
 		controlNombre.setFontSize(8);
+		controlNombre.bindVisibleToProperty("editar");
 
 		new Label(panelDatosEstudiante).setText("Apellido:");
 
 		TextBox apellido = new TextBox(panelDatosEstudiante);
 		apellido.withFilter(LectorDeNotasFiltrosDeTexto.FILTRO_ALFABETICO);
 		apellido.bindValueToProperty("apellido");
+		apellido.bindEnabledToProperty("editar");
 		apellido.setWidth(150);
 
 		Label controlApellido = new Label(panelDatosEstudiante);
@@ -75,20 +81,26 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 		controlApellido.bindForegroundToProperty("controlApellido")
 				.setTransformer(new TransformadorColorEnLosValores());
 		controlApellido.setFontSize(8);
+		controlApellido.bindVisibleToProperty("editar");
 
 		new Label(panelDatosEstudiante).setText("Github:");
 
 		TextBox gitHub = new TextBox(panelDatosEstudiante);
 		gitHub.withFilter(LectorDeNotasFiltrosDeTexto.FILTRO_ALFANUMERICO);
 		gitHub.bindValueToProperty("gitHub");
+		gitHub.bindEnabledToProperty("editar");
 		gitHub.setWidth(150);
 
 		Label controlGitHub = new Label(panelDatosEstudiante);
 		controlGitHub.bindValueToProperty("controlGitHub").setTransformer(new TransformadorControlGitHub());
 		controlGitHub.bindForegroundToProperty("controlGitHub").setTransformer(new TransformadorColorEnLosValores());
 		controlGitHub.setFontSize(8);
+		controlGitHub.bindVisibleToProperty("editar");
 
 		new Label(panelDatosEstudiante).setText("Editar Mis Datos");
+		
+		CheckBox editarEstudiante = new CheckBox(panelDatosEstudiante);
+		editarEstudiante.bindValueToProperty("editar");
 
 		Button actualizarDatosEstudiante = new Button(panelDatosEstudiante);
 		actualizarDatosEstudiante.setCaption("Actualizar Mis Datos");
@@ -104,9 +116,9 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 		
 		Table<Asignacion> tabla = new Table<Asignacion>(panelPrincipal, Asignacion.class);
 
-//		tabla.bindItemsToProperty("asignaciones");
-//		tabla.bindValueToProperty("asignacionSeleccionada");
-//		tabla.setNumberVisibleRows(10);
+		tabla.bindItemsToProperty("asignaciones");
+		tabla.bindValueToProperty("asignacionSeleccionada");
+		tabla.setNumberVisibleRows(10);
 
 		Column<Asignacion> columnaTitulo = new Column<Asignacion>(tabla);
 		columnaTitulo.setTitle("Asignacion");
@@ -126,6 +138,8 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 		Column<Asignacion> columnaEstado = new Column<Asignacion>(tabla);
 		columnaEstado.setTitle("Estado");
 		columnaEstado.setFixedSize(150);
+		columnaEstado.bindContentsToProperty("aprobado").setTransformer(new TransformadorAprobadoDesabrobado());
+		columnaEstado.bindBackground("aprobado").setTransformer(new TransformadorColor());
 	}
 /*	
 	protected void executeTask() {
