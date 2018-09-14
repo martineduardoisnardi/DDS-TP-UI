@@ -16,7 +16,7 @@ public class DatosEstudianteVM {
 	private String apellido;
 	private String gitHub;
 	private boolean editar = false;
-	private static final int NUMERO_DIGITOS_LEGAJO = 7;
+	private boolean noEditable = false;
 	private Asignacion asignacionSeleccionada;
 
 	public DatosEstudianteVM(Estudiante estudiante) {
@@ -38,8 +38,6 @@ public class DatosEstudianteVM {
 
 	public void setLegajo(int _legajo) {
 		this.legajo = _legajo;
-		ObservableUtils.firePropertyChanged(this, "controlLegajo");
-		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
 
 	public String getNombre() {
@@ -75,19 +73,20 @@ public class DatosEstudianteVM {
 	public boolean isEditar() {
 		return editar;
 	}
-
+	
+	public boolean isNoEditable() {
+		return noEditable;
+	}
+	
 	public void setEditar(boolean editar) {
 		this.editar = editar;
-		this.legajo = estudiante.getLegajo();
 		this.nombre = estudiante.getNombre();
 		this.apellido = estudiante.getApellido();
 		this.gitHub = estudiante.getUsuarioGithub();
-		ObservableUtils.firePropertyChanged(this, "legajo");
 		ObservableUtils.firePropertyChanged(this, "nombre");
 		ObservableUtils.firePropertyChanged(this, "apellido");
 		ObservableUtils.firePropertyChanged(this, "gitHub");
 		ObservableUtils.firePropertyChanged(this, "controlEditar");
-		ObservableUtils.firePropertyChanged(this, "controlLegajo");
 		ObservableUtils.firePropertyChanged(this, "controlNombre");
 		ObservableUtils.firePropertyChanged(this, "controlApellido");
 		ObservableUtils.firePropertyChanged(this, "controlGitHub");
@@ -106,10 +105,6 @@ public class DatosEstudianteVM {
 		return estudiante.getAsignaciones();
 	}
 	
-	public boolean isControlLegajo() {
-		return Integer.toString(legajo).length() == NUMERO_DIGITOS_LEGAJO;
-	}
-
 	public boolean isControlNombre() {
 		return nombre.matches("[[A-Za-z]+][A-Za-z ]*");
 	}
@@ -123,8 +118,7 @@ public class DatosEstudianteVM {
 	}
 
 	public boolean isControlEditar() {
-		return this.isControlLegajo() && this.isControlNombre() && this.isControlApellido()
-				&& this.isControlGitHub();
+		return this.isControlNombre() && this.isControlApellido() && this.isControlGitHub();
 	}
 	
 	public String getSaludo() {

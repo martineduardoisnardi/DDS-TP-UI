@@ -45,15 +45,10 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 
 		NumericField legajo = new NumericField(panelDatosEstudiante);
 		legajo.bindValueToProperty("legajo");
-		legajo.bindEnabledToProperty("editar");
+		legajo.bindEnabledToProperty("noEditable");
 		legajo.setWidth(150);
+		Label Legajo = new Label(panelDatosEstudiante);
 		
-		Label controlLegajo = new Label(panelDatosEstudiante);
-		controlLegajo.bindValueToProperty("controlLegajo").setTransformer(new TransformadorControlLegajo());
-		controlLegajo.bindForegroundToProperty("controlLegajo").setTransformer(new TransformadorColorEnLosValores());
-		controlLegajo.setFontSize(8);
-		controlLegajo.bindVisibleToProperty("editar");
-
 		new Label(panelDatosEstudiante).setText("Nombre:");
 
 		TextBox nombre = new TextBox(panelDatosEstudiante);
