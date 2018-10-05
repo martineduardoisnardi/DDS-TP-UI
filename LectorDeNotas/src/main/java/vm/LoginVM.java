@@ -1,65 +1,39 @@
 package vm;
 
-import excepciones.LoginException;
 import java.util.List;
 import org.uqbar.commons.utils.Observable;
 
-import model.Asignacion;
 import model.Estudiante;
 import repositorios.Repositorios;
 
 @Observable
 public class LoginVM {
 	
-	private int legajo;
-	private String contrasenia;
 	private List<Estudiante> estudiantes;
 	private Estudiante estudianteSeleccionado;
-	private List<Asignacion> asignacionesEstudiante;
 
 	public LoginVM() {
 		this.estudiantes = Repositorios.estudiantes.todos();
 	}
 
-	public void validarEstudiante() {
-		Estudiante estudiantePreSeleccionado = estudiantes.stream()
-		                        .filter(estudiante -> estudiante.getLegajo() == legajo)
-							    .findAny().orElse(null);
-		
-		if (estudiantePreSeleccionado == null) {	
-			throw new LoginException("El número de Legajo no corresponde a un alumno de la UTN");
-		}
-		
-		if (estudiantePreSeleccionado.getContrasenia() == contrasenia) {
-			throw new LoginException("La contraseña ingresada es incorrecta");
-		}else {
-			estudianteSeleccionado = estudiantePreSeleccionado;
-		}
-
-		
+	public void autenticar() {
+		this.estudianteSeleccionado.autenticar();
 	}
 	
+	public List<Estudiante> getEstudiantes() {
+		return estudiantes;
+	}
+	
+	public void setEstudiante(List<Estudiante> estudiantes) {
+		this.estudiantes = estudiantes;
+	}
+
 	public Estudiante getEstudianteSeleccionado() {
 		return estudianteSeleccionado;
 	}
-	
-	public List<Asignacion> getAsignacionesEstudiante() {
-		return asignacionesEstudiante;
-	}
-	
-	public int getLegajo() {
-		return legajo;
-	}
-	
-	public String getContrasenia() {
-		return contrasenia;
-	}
 
-	public void setLegajo(int legajo) {
-		this.legajo = legajo;
+	public void setEstudianteSeleccionado(Estudiante estudianteSeleccionado) {
+		this.estudianteSeleccionado = estudianteSeleccionado;
 	}
 	
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
 }

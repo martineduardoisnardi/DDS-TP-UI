@@ -26,9 +26,9 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 	}
 
 	@Override
-	public void createContents(Panel mainPanel) {
-		this.configureLayout(mainPanel);
-		this.createMainTemplate(mainPanel);
+	public void createContents(Panel panelPrincipal) {
+		this.configureLayout(panelPrincipal);
+		this.createMainTemplate(panelPrincipal);
 	}
 
 	@Override
@@ -45,9 +45,14 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 
 		NumericField legajo = new NumericField(panelDatosEstudiante);
 		legajo.bindValueToProperty("legajo");
-		legajo.bindEnabledToProperty("noEditable");
+		legajo.bindEnabledToProperty("editar");
 		legajo.setWidth(150);
-		Label Legajo = new Label(panelDatosEstudiante);
+		
+		Label controlLegajo = new Label(panelDatosEstudiante);
+		controlLegajo.bindValueToProperty("controlLegajo").setTransformer(new TransformadorControlLegajo());
+		controlLegajo.bindForegroundToProperty("controlLegajo").setTransformer(new TransformadorColorEnLosValores());
+		controlLegajo.setFontSize(8);
+		controlLegajo.bindVisibleToProperty("editar");
 		
 		new Label(panelDatosEstudiante).setText("Nombre:");
 
@@ -103,7 +108,7 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 		actualizarDatosEstudiante.onClick(() -> this.getModelObject().actualizarDatosEstudiante());
 
 		new Label(panelPrincipal).setText("============================================");
-
+		
 		Panel panelNotasDelEstudiante = new Panel(panelPrincipal);
 		panelNotasDelEstudiante.setLayout(new VerticalLayout());
 
@@ -131,21 +136,17 @@ public class VentanaDatosEstudiante extends SimpleWindow<DatosEstudianteVM> {
 		columnaNota.bindContentsToProperty("ultimaNota");
 
 		Column<Asignacion> columnaEstado = new Column<Asignacion>(tabla);
-		columnaEstado.setTitle("Estado");
+		columnaEstado.setTitle("Status");
 		columnaEstado.setFixedSize(150);
 		columnaEstado.bindContentsToProperty("aprobado").setTransformer(new TransformadorAprobadoDesabrobado());
 		columnaEstado.bindBackground("aprobado").setTransformer(new TransformadorColor());
 	}
-/*	
-	protected void executeTask() {
-		this.getModelObject().getAsignacionesDelEstudiante();
-	}
-*/	
+	
 	@Override
 	protected void addActions(Panel panelAcciones) {
-		Button checkAsignacion = new Button(panelAcciones);
-		checkAsignacion.setCaption("Chequear Mis Notas");
-		checkAsignacion.onClick(()-> this.getModelObject().getAsignacionesDelEstudiante());
+		Button checkAsignaciones = new Button(panelAcciones);
+		checkAsignaciones.setCaption("Chequear Mis Notas");
+		checkAsignaciones.onClick(()-> this.getModelObject().checkAsignacionesDelEstudiante());
 
 	}	
 	

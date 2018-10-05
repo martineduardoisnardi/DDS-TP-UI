@@ -1,58 +1,50 @@
 package model;
 
 import java.util.List;
-
-import org.uqbar.commons.model.Entity;
+import model.Nota;
 import org.uqbar.commons.utils.Observable;
 
 @Observable
-public class Asignacion extends Entity{
+public class Asignacion {
 	private int id;
-	private String titulo;
-	private String descripcion;
-	private List<Nota> notas;
-	
-	public Asignacion(int id, String titulo, String descripcion, List<Nota> notas) {
-		this.id = id;
-		this.titulo = titulo;
-		this.descripcion = descripcion;
-		this.notas = notas;
-	}
+	private String title;
+	private String description;
+	private List<Nota> grades;
 	
 	public boolean isAprobado() {
-		if (notas.isEmpty()) {
+		if (grades.isEmpty()) {
 			return true;
 		}
-		return notas.get(notas.size()-1).estaAprobado();
+		return grades.get(grades.size()-1).isAprobado();
 	}
 
 	public String getUltimaNota() {
-		if (notas.isEmpty()) {
+		if (grades.isEmpty()) {
 			return "-";
 		}
 
-		return notas.get(notas.size()-1).getValor();
+		return grades.get(grades.size()-1).getValor();
 	}
 
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
 	public String getTitulo() {
-		return titulo;
+		return title;
 	}
 
 	public String getDescripcion() {
-		return descripcion;
+		return description;
 	}
 
 	public List<Nota> getNotas() {
-		return notas;
+		return grades;
 	}
 
 	public void setNotas(List<Nota> notas) {
-		this.notas = notas;
+		this.grades = notas;
 	}	
 	
 }

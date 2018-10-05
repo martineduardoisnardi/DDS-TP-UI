@@ -1,25 +1,22 @@
 package ventanas;
 
-import excepciones.LoginException;
+import model.Estudiante;
+
 import org.uqbar.arena.aop.windows.TransactionalDialog;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
-import org.uqbar.arena.widgets.NumericField;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.PasswordField;
 import org.uqbar.arena.widgets.Selector;
-import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import excepciones.ExcepcionLegajo;
+import excepciones.ExcepcionEstudiante;
 import excepciones.LectorDeNotasExcepciones;
-import filtros.LectorDeNotasFiltrosDeTexto;
+import excepciones.ExcepcionToken;
 import vm.LoginVM;
 
-@SuppressWarnings({"serial" })
 public class VentanaLogin extends TransactionalDialog<LoginVM>{
 	
 	public VentanaLogin (WindowOwner owner){
@@ -29,26 +26,23 @@ public class VentanaLogin extends TransactionalDialog<LoginVM>{
 	@Override
 	protected void createFormPanel(Panel panelLogin) {
 		this.setTitle("Lector de Notas - Login");
-				
+		
+		new Label(panelLogin)
+		.setText("Seleccione un estudiante")
+		.setFontSize(14);
+		
 		Panel seleccionEstudiante = new Panel(panelLogin);
 		seleccionEstudiante.setLayout(new ColumnLayout(2));
 		
-		new Label(seleccionEstudiante).setText("Legajo");
+		new Label(seleccionEstudiante).setText("Estudiante");
+		Selector<Estudiante> selector = new Selector<Estudiante>(seleccionEstudiante);
+		selector.allowNull(false);
+		selector.bindItemsToProperty("estudiantes").setAdapter(new PropertyAdapter(Estudiante.class, "alias"));
+		selector.bindValueToProperty("estudianteSeleccionado");
 		
-		NumericField codigo = new NumericField(seleccionEstudiante);
-		codigo.bindValueToProperty("legajo");
-		codigo.setWidth(150);
-		
-		new Label(seleccionEstudiante).setText("Contraseña");
-
-		PasswordField contrasenia = new PasswordField(seleccionEstudiante);
-		contrasenia.withFilter(LectorDeNotasFiltrosDeTexto.FILTRO_ALFANUMERICO);
-		contrasenia.bindValueToProperty("contrasenia");
-		contrasenia.setWidth(150);
-		
-		Label blanco = new Label (panelLogin);
-		blanco.setHeight(100);
-		blanco.setWidth(120);
+		Label white = new Label (panelLogin);
+		white.setHeight(100);
+		white.setWidth(120);
 	}
 	
 	@Override
@@ -67,13 +61,15 @@ public class VentanaLogin extends TransactionalDialog<LoginVM>{
 	@Override
 	protected void executeTask() {
 		try {
-			this.getModelObject().validarEstudiante();
-		} catch (LoginException e){
-			throw new LoginException(e.getMessage());
+			this.getModelObject().autenticar();
+		} catch (ExcepcionToken e){
+			throw new LectorDeNotasExcepciones(e.getMessage());
+		} catch (ExcepcionEstudiante e){
+			throw new LectorDeNotasExcepciones("Hubo un problema de autenticacion" + e.getMessage());
 		}
-		SimpleWindow<?> panelDatosEstudiante = 
-				new VentanaDatosEstudiante(this, this.getModelObject().getEstudianteSeleccionado());
-		panelDatosEstudiante.open();
+		SimpleWindow<?> studentPanel = new VentanaDatosEstudiante(this, this.getModelObject()
+				.getEstudianteSeleccionado());
+		studentPanel.open();
 		this.cancelTask();
 	}
 }

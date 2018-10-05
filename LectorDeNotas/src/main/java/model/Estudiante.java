@@ -3,62 +3,82 @@ package model;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
-import repositorios.RepositorioAsignaciones;
-import repositorios.Repositorios;
+import excepciones.ExcepcionToken;
 
 @Observable
 public class Estudiante {
-	private int legajo;
-	private String contrasenia;
-	private String nombre;
-	private String apellido;
-	private String usuarioGithub;
+	private String code;
+	private String first_name;
+	private String last_name;
+	private String github_user;
+	private String alias;
+	private String token;
 	private List<Asignacion> asignaciones;
 	
-	public Estudiante(int legajo, String contrasenia, String nombre, String apellido, String usuarioGithub) {
-		this.legajo = legajo;
-		this.contrasenia = contrasenia;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.usuarioGithub = usuarioGithub;
-	}
-		
-	public void actualizarDatos(int legajo, String nombre, String apellido, String UsuarioGithub) {
-		this.legajo = legajo;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.usuarioGithub = UsuarioGithub;
+	public Estudiante(String alias) {
+		this.alias = alias;
 	}
 	
-	public List<Asignacion> asignacionesDelEstudiante() {
-//		return this.asignaciones = ((RepositorioAsignaciones) asignaciones).todos();
-		return this.asignaciones = RepositorioAsignaciones.getInstance().todos();
+	public Estudiante(String alias, String token) {
+		this.alias = alias;
+		this.token = token;
+	}
+	
+	public void autenticar() {
+		if (this.isSetToken()) {
+			throw new ExcepcionToken("El Usuario no tiene un token asociado.");
+		}
+		Estudiante respuesta = new RequestService().getAutenticacion(this.token);
+		this.code = respuesta.getLegajo();
+		this.first_name = respuesta.getNombre();
+		this.last_name = respuesta.getApellido();
+		this.github_user = respuesta.getUsuarioGithub();
+	}
+
+	private boolean isSetToken() {
+		return token == null;
+	}
+	
+	public void actualizarDatos(String legajo, String nombre, String apellido, String usuarioGithub) {
+		this.code = legajo;
+		this.first_name = nombre;
+		this.last_name = apellido;
+		this.github_user = usuarioGithub;
+		new RequestService().putActualizarDatosEstudiante(this);
+	}
+	
+	public void checkAsignaciones() {
+		this.asignaciones = new RequestService().getAsignacionesDelEstudiante(this.token);
 	}
 	
 	/****************************************************
 	 * Getters
 	 ****************************************************/
 
-	public int getLegajo() {
-		return legajo;
+	public String getToken() {
+		return token;
 	}
-
-	public String getContrasenia() {
-		return contrasenia;
+	
+	public String getLegajo() {
+		return code;
 	}
 	
 	public String getNombre() {
-		return nombre;
+		return first_name;
 	}
 
 	public String getApellido() {
-		return apellido;
+		return last_name;
 	}
 
 	public String getUsuarioGithub() {
-		return usuarioGithub;
+		return github_user;
 	}
-
+	
+	public String getAlias() {
+		return alias;
+	}
+	
 	public List<Asignacion> getAsignaciones() {
 		return asignaciones;
 	}

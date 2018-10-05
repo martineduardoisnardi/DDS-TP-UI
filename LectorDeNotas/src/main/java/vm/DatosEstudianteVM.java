@@ -11,12 +11,12 @@ import model.Estudiante;
 @Observable
 public class DatosEstudianteVM {
 	private Estudiante estudiante;
-	private int legajo;
+	private String legajo;
 	private String nombre;
 	private String apellido;
 	private String gitHub;
 	private boolean editar = false;
-	private boolean noEditable = false;
+	private static final int NUMERO_DIGITOS_LEGAJO = 7;
 	private Asignacion asignacionSeleccionada;
 
 	public DatosEstudianteVM(Estudiante estudiante) {
@@ -28,16 +28,23 @@ public class DatosEstudianteVM {
 		editar = false;
 	}
 	
+	public void checkAsignacionesDelEstudiante() {
+		estudiante.checkAsignaciones();
+		ObservableUtils.firePropertyChanged(this, "asignaciones");
+	}
+	
 	public void readAsignaciones() {
 
 	}
 
-	public int getLegajo() {
+	public String getLegajo() {
 		return estudiante.getLegajo();
 	}
 
-	public void setLegajo(int _legajo) {
+	public void setLegajo(String _legajo) {
 		this.legajo = _legajo;
+		ObservableUtils.firePropertyChanged(this, "controlLegajo");
+		ObservableUtils.firePropertyChanged(this, "controlEditar");
 	}
 
 	public String getNombre() {
@@ -74,15 +81,13 @@ public class DatosEstudianteVM {
 		return editar;
 	}
 	
-	public boolean isNoEditable() {
-		return noEditable;
-	}
-	
 	public void setEditar(boolean editar) {
 		this.editar = editar;
+		this.legajo = estudiante.getLegajo();
 		this.nombre = estudiante.getNombre();
 		this.apellido = estudiante.getApellido();
 		this.gitHub = estudiante.getUsuarioGithub();
+		ObservableUtils.firePropertyChanged(this, "legajo");
 		ObservableUtils.firePropertyChanged(this, "nombre");
 		ObservableUtils.firePropertyChanged(this, "apellido");
 		ObservableUtils.firePropertyChanged(this, "gitHub");
@@ -92,17 +97,16 @@ public class DatosEstudianteVM {
 		ObservableUtils.firePropertyChanged(this, "controlGitHub");
 	}
 	
-	public List<Asignacion> getAsignacionesDelEstudiante() {
-		return estudiante.asignacionesDelEstudiante();
-	}
-	
-
 	public Asignacion getAsignacionSeleccionada() {
 		return asignacionSeleccionada;
 	}
     
 	public List<Asignacion> getAsignaciones() {
 		return estudiante.getAsignaciones();
+	}
+	
+	public boolean isControlLegajo() {
+		return legajo.length() == NUMERO_DIGITOS_LEGAJO;
 	}
 	
 	public boolean isControlNombre() {
@@ -118,11 +122,12 @@ public class DatosEstudianteVM {
 	}
 
 	public boolean isControlEditar() {
-		return this.isControlNombre() && this.isControlApellido() && this.isControlGitHub();
+		return this.isEditar() && this.isControlLegajo() && this.isControlNombre() && this.isControlApellido()
+				&& this.isControlGitHub();
 	}
 	
 	public String getSaludo() {
-		return "Bienvenido !!!";
+		return "Hola " + this.estudiante.getAlias() + ", bienvenido !!!";
 	}
 
 }
